@@ -1,0 +1,7 @@
+src/DryCleaningService/.vs/
+src/DryCleaningService/DryCleaningService.api/DryCleaningService.api.csproj.user
+src/DryCleaningService/DryCleaningService.api/DryCleaningService.api.http
+src/DryCleaningService/DryCleaningService.api.Tests/bin/
+src/DryCleaningService/DryCleaningService.api.Tests/obj/
+src/DryCleaningService/DryCleaningService.api/bin/
+src/DryCleaningService/DryCleaningService.api/obj/
