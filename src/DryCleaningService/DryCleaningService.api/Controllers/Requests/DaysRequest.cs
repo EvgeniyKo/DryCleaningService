@@ -1,11 +1,10 @@
-﻿using DryCleaningService.api.Converters;
-using System.Text.Json.Serialization;
+﻿using Microsoft.AspNetCore.Mvc;
 
 namespace DryCleaningService.api.Controllers.Requests
 {
     public class DaysRequest : DayScheduleRequest
     {
-        [JsonConverter(typeof(DayOfWeekConverter))]
+        [FromQuery(Name = "dayOfWeek")]
         public DayOfWeek DayOfWeek { get; set; } = DayOfWeek.Sunday;
     }
 }

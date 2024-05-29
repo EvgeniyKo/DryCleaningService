@@ -1,11 +1,12 @@
-﻿using DryCleaningService.api.Converters;
-using System.Text.Json.Serialization;
+﻿using DryCleaningService.api.BaseModelBinder;
+using Microsoft.AspNetCore.Mvc;
 
 namespace DryCleaningService.api.Controllers.Requests
 {
     public class DatesCloseRequest
     {
-        [JsonConverter(typeof(DateOnlyArrayConverter))]
+        [FromQuery(Name = "dates")]
+        [ModelBinder(typeof(DatesOnlyArrayModelBinder))]
         public DateOnly[] Dates { get; set; } = Array.Empty<DateOnly>();
     }
 }

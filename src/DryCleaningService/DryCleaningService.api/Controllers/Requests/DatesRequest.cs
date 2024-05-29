@@ -1,11 +1,12 @@
-﻿using DryCleaningService.api.Converters;
-using System.Text.Json.Serialization;
+﻿using DryCleaningService.api.BaseModelBinder;
+using Microsoft.AspNetCore.Mvc;
 
 namespace DryCleaningService.api.Controllers.Requests
 {
     public class DatesRequest : DayScheduleRequest
     {
-        [JsonConverter(typeof(DateOnlyConverter))]
+        [FromQuery(Name = "date")]
+        [ModelBinder(typeof(DateOnlyModelBinder))]
         public DateOnly Date { get; set; } = DateOnly.MinValue;
     }
 }

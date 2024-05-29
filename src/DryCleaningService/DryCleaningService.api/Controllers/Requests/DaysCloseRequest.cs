@@ -1,11 +1,12 @@
-﻿using DryCleaningService.api.Converters;
-using System.Text.Json.Serialization;
+﻿using DryCleaningService.api.BaseModelBinder;
+using Microsoft.AspNetCore.Mvc;
 
 namespace DryCleaningService.api.Controllers.Requests
 {
     public class DaysCloseRequest
     {
-        [JsonConverter(typeof(DayOfWeekArrayConverter))]
+        [FromQuery(Name = "daysOfWeek")]
+        [ModelBinder(typeof(DayOfWeekArrayModelBinder))]
         public DayOfWeek[] DaysOfWeek { get; set; } = Array.Empty<DayOfWeek>();
     }
 }

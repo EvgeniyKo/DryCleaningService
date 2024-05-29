@@ -40,12 +40,30 @@
 
         private async Task SetupTestData()
         {
-            await PostAsync("/day-schedule", """{ "OpeningHour":"09:00", "ClosingHour":"15:00" }""");
-            await PostAsync("/days", """{ "DayOfWeek":"friday",  "OpeningHour":"10:00", "ClosingHour":"17:00" }""");
-            await PostAsync("/dates", """{ "Date":"2010-12-24",  "OpeningHour":"08:00", "ClosingHour":"13:00" }""");
+            await PutAsync(
+                "/day-schedule",
+                new UriParameter("openingHour", "09:00"),
+                new UriParameter("closingHour", "15:00"));
 
-            await PostAsync("/days-close", """{ "DaysOfWeek":["Sunday", "Wednesday"] }""");
-            await PostAsync("/dates-close", """{ "Dates":["2010-12-25", "2010-12-31"] }""");
+            await PutAsync(
+                "/days",
+                new UriParameter("dayOfWeek", "friday"),
+                new UriParameter("openingHour", "10:00"),
+                new UriParameter("closingHour", "17:00"));
+
+            await PutAsync(
+                "/dates",
+                new UriParameter("date", "2010-12-24"),
+                new UriParameter("openingHour", "08:00"),
+                new UriParameter("closingHour", "13:00"));
+
+            await PutAsync(
+                "/days-close",
+                new UriParameter("daysOfWeek", "Sunday,Wednesday"));
+
+            await PutAsync(
+                "/dates-close",
+                new UriParameter("dates", "2010-12-25,2010-12-31"));
         }
 
         private async Task<HttpResponseMessage> CalculateAsync(int minutes, string date)

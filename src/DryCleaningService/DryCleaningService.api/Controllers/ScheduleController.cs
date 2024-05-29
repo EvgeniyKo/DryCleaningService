@@ -15,41 +15,41 @@ namespace DryCleaningService.api.Controllers
             _scheduleService = scheduleService;
         }
 
-        [HttpPost("day-schedule")]
-        public void PostDaySchedule([FromBody] DayScheduleRequest hours)
+        [HttpPut("day-schedule")]
+        public void PutDaySchedule(DayScheduleRequest request)
         {
-            var dateRule = new GeneralDateRule(hours.OpeningHour, hours.ClosingHour, true);
+            var dateRule = new GeneralDateRule(request.OpeningHour, request.ClosingHour, true);
             _scheduleService.AddDateRule(dateRule);
         }
 
-        [HttpPost("days")]
-        public void PostDays([FromBody] DaysRequest days)
+        [HttpPut("days")]
+        public void PutDays(DaysRequest request)
         {
-            var dateRule = new WeekDayRule(days.DayOfWeek, days.OpeningHour, days.ClosingHour, true);
+            var dateRule = new WeekDayRule(request.DayOfWeek, request.OpeningHour, request.ClosingHour, true);
             _scheduleService.AddDateRule(dateRule);
         }
 
-        [HttpPost("dates")]
-        public void PostDates([FromBody] DatesRequest dates)
+        [HttpPut("dates")]
+        public void PutDates(DatesRequest request)
         {
-            var dateRule = new DateRule(dates.Date, dates.OpeningHour, dates.ClosingHour, true);
+            var dateRule = new DateRule(request.Date, request.OpeningHour, request.ClosingHour, true);
             _scheduleService.AddDateRule(dateRule);
         }
 
-        [HttpPost("days-close")]
-        public void PostDaysClose([FromBody] DaysCloseRequest days)
+        [HttpPut("days-close")]
+        public void PutDaysClose(DaysCloseRequest request)
         {
-            foreach (var day in days.DaysOfWeek)
+            foreach (var day in request.DaysOfWeek)
             {
                 var dateRule = new WeekDayRule(day, TimeOnly.MinValue, TimeOnly.MaxValue, false);
                 _scheduleService.AddDateRule(dateRule);
             }
         }
 
-        [HttpPost("dates-close")]
-        public void PostDatesClose([FromBody] DatesCloseRequest dates)
+        [HttpPut("dates-close")]
+        public void PutDatesClose(DatesCloseRequest request)
         {
-            foreach (var date in dates.Dates)
+            foreach (var date in request.Dates)
             {
                 var dateRule = new DateRule(date, TimeOnly.MinValue, TimeOnly.MaxValue, false);
                 _scheduleService.AddDateRule(dateRule);

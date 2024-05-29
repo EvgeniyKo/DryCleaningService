@@ -1,13 +1,16 @@
-﻿using DryCleaningService.api.Converters;
-using System.Text.Json.Serialization;
+﻿using DryCleaningService.api.BaseModelBinder;
+using Microsoft.AspNetCore.Mvc;
 
 namespace DryCleaningService.api.Controllers.Requests
 {
     public class DayScheduleRequest
     {
-        [JsonConverter(typeof(TimeOnlyConverter))]
+        [FromQuery(Name = "openingHour")]
+        [ModelBinder(typeof(TimeOnlyModelBinder))]
         public TimeOnly OpeningHour { get; set; } = TimeOnly.MinValue;
-        [JsonConverter(typeof(TimeOnlyConverter))]
+
+        [FromQuery(Name = "closingHour")]
+        [ModelBinder(typeof(TimeOnlyModelBinder))]
         public TimeOnly ClosingHour { get; set; } = TimeOnly.MinValue;
     }
 }
