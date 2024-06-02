@@ -11,7 +11,12 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
+builder.Services.AddSwaggerGen(s =>
+{
+    s.MapType<TimeOnly>(() => new Microsoft.OpenApi.Models.OpenApiSchema { Type = typeof(string).Name });
+    s.MapType<DateOnly>(() => new Microsoft.OpenApi.Models.OpenApiSchema { Type = typeof(string).Name });
+    s.MapType<DayOfWeek>(() => new Microsoft.OpenApi.Models.OpenApiSchema { Type = typeof(string).Name });
+});
 
 builder.Services.AddScoped<IScheduleService, ScheduleService>();
 builder.Services.AddSingleton<IDateService, DateService>();
